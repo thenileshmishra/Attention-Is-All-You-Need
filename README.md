@@ -27,9 +27,8 @@
 
     Self-attention computes a weighted sum of all token representations using the query (Q), key (K), and value (V) matrices:
 
-    \[
-    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V
-    \]
+    <img src="Attention.png" alt="Self-Attention Diagram" width="400"/>
+
 
     Where:  
     - \(Q\) = Query matrix  
