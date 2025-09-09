@@ -1,0 +1,55 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Dependency files
+*.egg-info/
+dist/
+build/
+*.egg
+
+# pip logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+.env.*
+
+# PyTorch cache
+~/.torch/
+
+# Package management
+*.whl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+.coverage
+htmlcov/
+.tox/
+
+# Log files
+*.log
+
+# Other
+*.sqlite3
+*.db
+
+# Ignore installed packages
+__pypackages__/
+
+# Ignore requirements
+requirements*.txt
