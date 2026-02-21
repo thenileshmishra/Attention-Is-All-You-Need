@@ -1,44 +1,31 @@
-# Abstract  
+# Simplified Transformer (Educational)
 
-## Before Transformer  
-- Models used **RNNs** and **CNNs** with an **encoder–decoder** structure.  
-- The best models added **attention** as an extra helper to improve translation accuracy (introduced around **2014–2015**).  
+A minimal encoder-decoder Transformer in **two files**. Trains on a toy reverse-sequence task so you can focus on the architecture, not the plumbing.
 
-## Transformer Innovation  
-- Introduced a new model built **only on attention**, with no recurrence (RNNs) or convolutions (CNNs).  
-- Achieves **faster training** and **better performance** than older models.  
+## Files
 
+| File | What it contains |
+|---|---|
+| `model.py` | PositionalEncoding, MultiHeadAttention, EncoderLayer, DecoderLayer, Transformer |
+| `train.py` | Data generation, training loop, greedy-decoding demo |
 
-# Introduction
-- **RNN**,**LSTM**, and **GRU** have been state-of-the-art methods for sequence modeling and tasks like langugae modeling and machine translation.
-- Many works have improved recurrent language models and **encoder-decoder** architecture.
-- But RNNs pricess data sequentially, which makes training slow and hard to parallelize, especially for long sequences.
-- Attention mechanims were added to help capture **long-range dependencies**, but usually still used alongside RNNs.
-- The Transformer was proposed to remove recurrence completely, relying only on attention for modeling sequences.
+## Run
 
-# Background
-- Earlier models like **Extended Neural GPU**, **ByteNet** and **ConvS2S** tried to reduce sequential by using **CNNs** instead of RNNs.
-- These CNN-based models process all positions in parallel, but the cost of relating distant positions grows with distance (linear for ConvS2S, logarithmic for ByteNet).
-- This make learning **long-range dependencies** harder.
-- The Transformer reduces this cost to a constant, by replacing recurrence with self-attention, allowing the model to look at all positions in the sequence simultaneously.
-- This Self-attention computes a weighted sum of all token representation. Notice that each token ends up with a mixture(average) of other token features.
+```bash
+pip install torch
+python train.py
+```
 
-    ### Self-Attention
+That's it. It trains for ~15 epochs and prints inference examples at the end.
 
-    Self-attention computes a weighted sum of all token representations using the query (Q), key (K), and value (V) matrices:
+## What you'll learn by reading the code
 
-    <img src="Attention.png" alt="Self-Attention Diagram" width="400"/>
-
-
-    Where:  
-    - \(Q\) = Query matrix  
-    - \(K\) = Key matrix  
-    - \(V\) = Value matrix  
-    - \(d_k\) = Dimension of the key vectors (used for scaling)
-
-- This averaging is powerful for capturing global context, but can sometimes blur fine-grained details.
-    Example: Subtle difference between similar words or positions in long sequences may be diluted.
-
-
+1. **Positional encoding** — sinusoidal position signal added to embeddings.
+2. **Multi-head attention** — Q/K/V projections, scaled dot-product, head splitting.
+3. **Encoder layer** — self-attention → residual + LayerNorm → feed-forward → residual + LayerNorm.
+4. **Decoder layer** — masked self-attention → cross-attention over encoder output → feed-forward.
+5. **Causal mask** — upper-triangular mask that prevents the decoder from looking ahead.
+6. **Teacher forcing** — feeding ground-truth target tokens during training.
+7. **Greedy decoding** — generating one token at a time at inference.
 
 
